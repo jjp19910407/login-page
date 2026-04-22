@@ -23,7 +23,10 @@
       "Bash(git fetch:*)",
       "Bash(git branch:*)",
       "mcp__vercel__deploy_to_vercel",
-      "Bash(npx vercel:*)"
+      "Bash(npx vercel:*)",
+      "Bash(gh auth:*)",
+      "Bash(git config:*)",
+      "Read(//Users/ya/.ssh/**)"
     ]
   }
 }
