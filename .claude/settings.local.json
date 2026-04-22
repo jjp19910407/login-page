@@ -18,7 +18,9 @@
       "Bash(git commit:*)",
       "Bash(git rebase:*)",
       "Bash(git fetch:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(git pull:*)",
+      "Bash(git rm:*)"
     ]
   }
 }
