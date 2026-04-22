@@ -16,17 +16,9 @@
       "Bash(git init:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "mcp__github__create_repository",
-      "Bash(git remote:*)",
-      "Bash(git push:*)",
-      "mcp__github__push_files",
+      "Bash(git rebase:*)",
       "Bash(git fetch:*)",
-      "Bash(git branch:*)",
-      "mcp__vercel__deploy_to_vercel",
-      "Bash(npx vercel:*)",
-      "Bash(gh auth:*)",
-      "Bash(git config:*)",
-      "Read(//Users/ya/.ssh/**)"
+      "Bash(git stash:*)"
     ]
   }
 }
