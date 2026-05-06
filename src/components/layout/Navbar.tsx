@@ -19,16 +19,18 @@ interface NavbarProps {
 }
 
 export function Navbar({ regions, userSlot }: NavbarProps) {
+  const [open, setOpen] = useState(false)
+
   return (
     <header className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur border-b border-slate-200 dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-4 h-14 flex items-center gap-3">
         {/* Mobile menu */}
-        <Sheet>
+        <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger className="md:hidden shrink-0 inline-flex items-center justify-center h-8 w-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
             <MenuIcon className="w-5 h-5" />
           </SheetTrigger>
           <SheetContent side="left" className="w-64 pt-8">
-            <Sidebar regions={regions} className="w-full block" />
+            <Sidebar regions={regions} className="w-full block" onNavigate={() => setOpen(false)} />
           </SheetContent>
         </Sheet>
 

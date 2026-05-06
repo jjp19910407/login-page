@@ -29,7 +29,7 @@ const categoryIcons: Record<string, string> = {
   other: "📦",
 }
 
-export function Sidebar({ regions, className }: { regions: Region[]; className?: string }) {
+export function Sidebar({ regions, className, onNavigate }: { regions: Region[]; className?: string; onNavigate?: () => void }) {
   const pathname = usePathname()
   const [expanded, setExpanded] = useState<Record<string, boolean>>(
     Object.fromEntries(regions.map((r) => [r.slug, true]))
@@ -40,6 +40,7 @@ export function Sidebar({ regions, className }: { regions: Region[]; className?:
       <div className="sticky top-4 space-y-1">
         <Link
           href="/"
+          onClick={onNavigate}
           className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
             pathname === "/"
               ? "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
@@ -70,6 +71,7 @@ export function Sidebar({ regions, className }: { regions: Region[]; className?:
                     <Link
                       key={cat.id}
                       href={href}
+                      onClick={onNavigate}
                       className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors ${
                         active
                           ? "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
