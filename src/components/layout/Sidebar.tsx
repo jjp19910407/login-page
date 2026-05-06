@@ -1,9 +1,9 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { ChevronDownIcon } from "lucide-react"
-import { useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import { ChevronDownIcon, LoaderCircleIcon } from "lucide-react"
+import { useState, useTransition } from "react"
 
 interface Category {
   id: number
@@ -31,24 +31,39 @@ const categoryIcons: Record<string, string> = {
 
 export function Sidebar({ regions, className, onNavigate }: { regions: Region[]; className?: string; onNavigate?: () => void }) {
   const pathname = usePathname()
+  const router = useRouter()
   const [expanded, setExpanded] = useState<Record<string, boolean>>(
     Object.fromEntries(regions.map((r) => [r.slug, true]))
   )
+  const [isPending, startTransition] = useTransition()
+  const [pendingHref, setPendingHref] = useState<string | null>(null)
+
+  function navigate(href: string) {
+    setPendingHref(href)
+    startTransition(() => {
+      router.push(href)
+      onNavigate?.()
+    })
+  }
 
   return (
     <nav className={className ?? "w-56 shrink-0 hidden md:block"}>
       <div className="sticky top-4 space-y-1">
-        <Link
-          href="/"
-          onClick={onNavigate}
-          className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+        <button
+          onClick={() => navigate("/")}
+          className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
             pathname === "/"
               ? "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
               : "text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
           }`}
         >
-          🏠 全部工具
-        </Link>
+          {isPending && pendingHref === "/" ? (
+            <LoaderCircleIcon className="w-4 h-4 animate-spin shrink-0" />
+          ) : (
+            <span>🏠</span>
+          )}
+          全部工具
+        </button>
 
         {regions.map((region) => (
           <div key={region.id}>
@@ -67,20 +82,24 @@ export function Sidebar({ regions, className, onNavigate }: { regions: Region[];
                 {region.categories.map((cat) => {
                   const href = `/${region.slug}/${cat.slug}`
                   const active = pathname === href
+                  const loading = isPending && pendingHref === href
                   return (
-                    <Link
+                    <button
                       key={cat.id}
-                      href={href}
-                      onClick={onNavigate}
-                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                      onClick={() => navigate(href)}
+                      className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors ${
                         active
                           ? "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
                           : "text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
                       }`}
                     >
-                      <span>{categoryIcons[cat.type] || "📦"}</span>
+                      {loading ? (
+                        <LoaderCircleIcon className="w-4 h-4 animate-spin shrink-0" />
+                      ) : (
+                        <span>{categoryIcons[cat.type] || "📦"}</span>
+                      )}
                       {cat.name}
-                    </Link>
+                    </button>
                   )
                 })}
               </div>

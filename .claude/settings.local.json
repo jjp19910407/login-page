@@ -20,7 +20,25 @@
       "Bash(git fetch:*)",
       "Bash(git stash:*)",
       "Bash(git pull:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(git push:*)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(open:*)",
+      "Bash(node:*)",
+      "Bash(npx tsc:*)",
+      "Bash(grep -E \"\\\\.\\(ts|tsx|js\\)$\")",
+      "Bash(npx drizzle-kit:*)",
+      "mcp__chrome-devtools__take_screenshot",
+      "mcp__chrome-devtools__list_console_messages",
+      "mcp__chrome-devtools__list_pages",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__new_page",
+      "Bash(cat .env*)",
+      "Bash(ls .env*)",
+      "mcp__vercel__list_teams",
+      "mcp__vercel__list_projects",
+      "Bash(vercel whoami:*)",
+      "Bash(npx vercel:*)"
     ]
   }
 }
