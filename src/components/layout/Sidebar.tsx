@@ -29,14 +29,14 @@ const categoryIcons: Record<string, string> = {
   other: "📦",
 }
 
-export function Sidebar({ regions }: { regions: Region[] }) {
+export function Sidebar({ regions, className }: { regions: Region[]; className?: string }) {
   const pathname = usePathname()
   const [expanded, setExpanded] = useState<Record<string, boolean>>(
     Object.fromEntries(regions.map((r) => [r.slug, true]))
   )
 
   return (
-    <nav className="w-56 shrink-0 hidden md:block">
+    <nav className={className ?? "w-56 shrink-0 hidden md:block"}>
       <div className="sticky top-4 space-y-1">
         <Link
           href="/"

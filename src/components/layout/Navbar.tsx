@@ -28,7 +28,7 @@ export function Navbar({ regions, userSlot }: NavbarProps) {
             <MenuIcon className="w-5 h-5" />
           </SheetTrigger>
           <SheetContent side="left" className="w-64 pt-8">
-            <Sidebar regions={regions} />
+            <Sidebar regions={regions} className="w-full block" />
           </SheetContent>
         </Sheet>
 
