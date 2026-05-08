@@ -95,15 +95,15 @@ export function ToolCard({ tool, isFavorited = false, isLoggedIn = false }: Tool
   return (
     <div
       onClick={handleClick}
-      className="group relative bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-5 cursor-pointer hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-200"
+      className="group relative bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-3 cursor-pointer hover:shadow-md hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-200"
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-3">
         {/* Logo */}
-        <div className="shrink-0 w-14 h-14 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center overflow-hidden">
+        <div className="shrink-0 w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center overflow-hidden">
           {tool.logoUrl ? (
             <img src={tool.logoUrl} alt={tool.name} className="w-full h-full object-cover" />
           ) : (
-            <span className="text-2xl font-bold text-slate-400">
+            <span className="text-lg font-bold text-slate-400">
               {tool.name.charAt(0).toUpperCase()}
             </span>
           )}
@@ -111,12 +111,12 @@ export function ToolCard({ tool, isFavorited = false, isLoggedIn = false }: Tool
 
         {/* Info */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-1.5 flex-wrap">
-            <h3 className="font-semibold text-slate-900 dark:text-white text-base truncate">
+          <div className="flex items-center gap-1 flex-wrap">
+            <h3 className="font-semibold text-slate-900 dark:text-white text-sm truncate">
               {tool.name}
             </h3>
             {tool.isFeatured && (
-              <span className="shrink-0 text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full">
+              <span className="shrink-0 text-xs bg-amber-100 text-amber-700 px-1 py-0.5 rounded-full leading-none">
                 推荐
               </span>
             )}
@@ -124,22 +124,22 @@ export function ToolCard({ tool, isFavorited = false, isLoggedIn = false }: Tool
 
           {/* 资费 badge */}
           {tool.pricingInfo && (
-            <span className={`inline-block mt-1 text-xs px-2 py-0.5 rounded-full font-medium ${pricingColor(tool.pricingInfo)}`}>
+            <span className={`inline-block mt-0.5 text-xs px-1.5 py-0.5 rounded-full font-medium leading-none ${pricingColor(tool.pricingInfo)}`}>
               {tool.pricingInfo}
             </span>
           )}
 
           {tool.description && (
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5 line-clamp-2">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
               {tool.description}
             </p>
           )}
           {tool.tags && tool.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1 mt-2">
+            <div className="flex flex-wrap gap-1 mt-1">
               {tool.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-1.5 py-0.5 rounded"
+                  className="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-1 py-0.5 rounded leading-none"
                 >
                   {tag}
                 </span>
@@ -153,22 +153,22 @@ export function ToolCard({ tool, isFavorited = false, isLoggedIn = false }: Tool
           onClick={addToFrequent}
           disabled={addingFrequent}
           title="添加到常用"
-          className="shrink-0 p-1.5 rounded-lg transition-colors text-slate-400 hover:text-green-500 hover:bg-green-50 dark:hover:bg-green-900/30 opacity-0 group-hover:opacity-100"
+          className="shrink-0 p-1 rounded-md transition-colors text-slate-400 hover:text-green-500 hover:bg-green-50 dark:hover:bg-green-900/30 opacity-0 group-hover:opacity-100"
         >
-          <PlusIcon className="w-4 h-4" />
+          <PlusIcon className="w-3.5 h-3.5" />
         </button>
 
         {/* Favorite button */}
         <button
           onClick={toggleFavorite}
           disabled={loading}
-          className={`shrink-0 p-1.5 rounded-lg transition-colors ${
+          className={`shrink-0 p-1 rounded-md transition-colors ${
             favorited
               ? "text-blue-500 bg-blue-50 dark:bg-blue-900/30"
               : "text-slate-400 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/30 opacity-0 group-hover:opacity-100"
           }`}
         >
-          <BookmarkIcon className="w-4 h-4" fill={favorited ? "currentColor" : "none"} />
+          <BookmarkIcon className="w-3.5 h-3.5" fill={favorited ? "currentColor" : "none"} />
         </button>
       </div>
     </div>

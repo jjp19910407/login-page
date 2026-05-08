@@ -1,11 +1,42 @@
 import { Suspense } from "react"
 import { ToolListServer } from "@/components/tool/ToolListServer"
+import type { Metadata } from "next"
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-nav.example.com"
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: siteUrl,
+  },
+}
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "AI 导航",
+  url: siteUrl,
+  description: "汇聚国内外最优质的 AI 工具，涵盖 AI 图片生成、AI 音乐生成、AI 编程助手、AI 聊天机器人等分类。",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${siteUrl}/search?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+}
 
 export default function HomePage() {
   return (
-    <Suspense fallback={<ToolListFallback />}>
-      <ToolListServer />
-    </Suspense>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      <Suspense fallback={<ToolListFallback />}>
+        <ToolListServer />
+      </Suspense>
+    </>
   )
 }
 

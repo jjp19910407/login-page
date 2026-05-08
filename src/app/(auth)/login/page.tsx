@@ -117,31 +117,7 @@ export default function LoginPage() {
             <p className="text-slate-500 text-sm mt-1">发现最好的 AI 工具</p>
           </div>
 
-          {/* 切换 tab */}
-          <div className="flex rounded-lg bg-slate-100 dark:bg-slate-800 p-1 mb-6">
-            <button
-              className={`flex-1 text-sm py-1.5 rounded-md transition-colors ${
-                mode === "password"
-                  ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-medium"
-                  : "text-slate-500"
-              }`}
-              onClick={() => setMode("password")}
-            >
-              密码登录
-            </button>
-            <button
-              className={`flex-1 text-sm py-1.5 rounded-md transition-colors ${
-                mode === "sms"
-                  ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-medium"
-                  : "text-slate-500"
-              }`}
-              onClick={() => setMode("sms")}
-            >
-              验证码登录
-            </button>
-          </div>
-
-          {mode === "password" ? (
+          {true ? (
             <div className="space-y-4">
               <div>
                 <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5 block">

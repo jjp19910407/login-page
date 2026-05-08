@@ -78,6 +78,7 @@ export const tools = pgTable(
     url: varchar("url", { length: 500 }).notNull(),
     logoUrl: text("logo_url"),
     pricingInfo: text("pricing_info"),
+    company: varchar("company", { length: 200 }),
     tags: text("tags").array(),
     isActive: boolean("is_active").default(true),
     isFeatured: boolean("is_featured").default(false),
@@ -138,6 +139,21 @@ export const frequentTools = pgTable(
   (t) => [uniqueIndex("frequent_tools_user_tool_idx").on(t.userId, t.toolId)]
 )
 
+export const customLinks = pgTable(
+  "custom_links",
+  {
+    id: serial("id").primaryKey(),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    name: varchar("name", { length: 100 }).notNull(),
+    url: varchar("url", { length: 500 }).notNull(),
+    sortOrder: integer("sort_order").default(0),
+    createdAt: timestamp("created_at").defaultNow(),
+  },
+  (t) => [index("custom_links_user_idx").on(t.userId)]
+)
+
 // ---- Relations ----
 
 export const regionsRelations = relations(regions, ({ many }) => ({
@@ -158,6 +174,7 @@ export const toolsRelations = relations(tools, ({ one, many }) => ({
 export const usersRelations = relations(users, ({ many }) => ({
   favorites: many(favorites),
   frequentTools: many(frequentTools),
+  customLinks: many(customLinks),
 }))
 
 export const favoritesRelations = relations(favorites, ({ one }) => ({
@@ -169,3 +186,8 @@ export const frequentToolsRelations = relations(frequentTools, ({ one }) => ({
   user: one(users, { fields: [frequentTools.userId], references: [users.id] }),
   tool: one(tools, { fields: [frequentTools.toolId], references: [tools.id] }),
 }))
+
+export const customLinksRelations = relations(customLinks, ({ one }) => ({
+  user: one(users, { fields: [customLinks.userId], references: [users.id] }),
+}))
+

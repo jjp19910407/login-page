@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
   if (session.role !== "admin") return NextResponse.json({ error: "无权限" }, { status: 403 })
 
   const body = await req.json()
-  const { name, url, description, logoUrl, categoryId, tags, isFeatured, sortOrder, pricingInfo } = body
+  const { name, url, description, logoUrl, categoryId, tags, isFeatured, sortOrder, pricingInfo, company } = body
 
   if (!name || !url || !categoryId) {
     return NextResponse.json({ error: "名称、网址、分类为必填项" }, { status: 400 })
@@ -53,6 +53,7 @@ export async function POST(req: NextRequest) {
       description,
       logoUrl,
       pricingInfo,
+      company: company || null,
       categoryId: parseInt(categoryId),
       tags: tags || [],
       isFeatured: isFeatured || false,
@@ -69,7 +70,7 @@ export async function PUT(req: NextRequest) {
   if (session.role !== "admin") return NextResponse.json({ error: "无权限" }, { status: 403 })
 
   const body = await req.json()
-  const { id, name, url, description, logoUrl, categoryId, tags, isFeatured, isActive, sortOrder, pricingInfo } = body
+  const { id, name, url, description, logoUrl, categoryId, tags, isFeatured, isActive, sortOrder, pricingInfo, company } = body
 
   const [tool] = await db
     .update(tools)
@@ -79,6 +80,7 @@ export async function PUT(req: NextRequest) {
       description,
       logoUrl,
       pricingInfo,
+      company: company || null,
       categoryId: parseInt(categoryId),
       tags: tags || [],
       isFeatured: isFeatured ?? false,

@@ -26,6 +26,7 @@ interface Tool {
   description?: string | null
   logoUrl?: string | null
   pricingInfo?: string | null
+  company?: string | null
   categoryId: number
   tags?: string[] | null
   isFeatured?: boolean | null
@@ -44,6 +45,7 @@ export function EditToolForm({ tool, regions }: { tool: Tool; regions: Region[] 
     description: tool.description || "",
     logoUrl: tool.logoUrl || "",
     pricingInfo: tool.pricingInfo || "",
+    company: tool.company || "",
     categoryId: String(tool.categoryId),
     tags: (tool.tags || []).join(", "),
     isFeatured: tool.isFeatured ?? false,
@@ -173,6 +175,11 @@ export function EditToolForm({ tool, regions }: { tool: Tool; regions: Region[] 
           </div>
         </div>
         <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" className="hidden" onChange={handleFileUpload} />
+      </div>
+
+      <div>
+        <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5 block">所属公司</label>
+        <Input value={form.company} onChange={(e) => set("company", e.target.value)} placeholder="如：OpenAI / Google / Anthropic" />
       </div>
 
       <div>

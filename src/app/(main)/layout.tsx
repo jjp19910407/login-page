@@ -30,10 +30,10 @@ export default async function MainLayout({ children }: { children: React.ReactNo
           </Suspense>
         }
       />
-      <div className="max-w-7xl mx-auto px-4 py-6 flex gap-6">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex gap-4">
         <Sidebar regions={navRegions} />
         <main className="flex-1 min-w-0">
-          <div className="mb-8">
+          <div className="mb-4">
             <Suspense fallback={<FrequentSectionFallback />}>
               <FrequentSectionServer />
             </Suspense>

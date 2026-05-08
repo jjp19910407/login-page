@@ -1,7 +1,7 @@
 import { getSession } from "@/lib/auth"
 import { db } from "@/db"
-import { tools, categories, frequentTools } from "@/db/schema"
-import { eq, desc } from "drizzle-orm"
+import { tools, categories, frequentTools, customLinks } from "@/db/schema"
+import { eq, desc, asc } from "drizzle-orm"
 import { FrequentSection } from "./FrequentSection"
 
 async function getFrequentTools(userId: number) {
@@ -24,15 +24,25 @@ async function getFrequentTools(userId: number) {
     .limit(12)
 }
 
+async function getCustomLinks(userId: number) {
+  return db
+    .select()
+    .from(customLinks)
+    .where(eq(customLinks.userId, userId))
+    .orderBy(asc(customLinks.sortOrder), asc(customLinks.createdAt))
+}
+
 export async function FrequentSectionServer() {
   const session = await getSession()
   const isLoggedIn = !!session.userId
   const isAdmin = session.role === "admin"
   const frequentList = session.userId ? await getFrequentTools(session.userId) : []
+  const customList = session.userId ? await getCustomLinks(session.userId) : []
 
   return (
     <FrequentSection
       initialItems={frequentList}
+      initialCustomLinks={customList}
       isLoggedIn={isLoggedIn}
       isAdmin={isAdmin}
     />

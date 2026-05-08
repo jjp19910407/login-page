@@ -44,7 +44,7 @@ export function ToolListClient({ allTools, favoritedIds, isLoggedIn }: ToolListC
   const rest = filtered.filter((t) => !t.isFeatured)
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* 搜索框 */}
       <div className="relative max-w-md">
         <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -57,18 +57,18 @@ export function ToolListClient({ allTools, favoritedIds, isLoggedIn }: ToolListC
       </div>
 
       {filtered.length === 0 ? (
-        <div className="text-center py-16 text-slate-400">
-          <div className="text-4xl mb-3">😕</div>
+        <div className="text-center py-12 text-slate-400">
+          <div className="text-3xl mb-2">😕</div>
           <p>没有找到相关工具</p>
         </div>
       ) : (
         <>
           {featured.length > 0 && !query.trim() && (
             <section>
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                 ⭐ 精选推荐
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {featured.map((tool) => (
                   <ToolCard
                     key={tool.id}
@@ -83,14 +83,14 @@ export function ToolListClient({ allTools, favoritedIds, isLoggedIn }: ToolListC
 
           <section>
             {!query.trim() && (
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                 🔥 全部工具
               </h2>
             )}
             {query.trim() && (
-              <p className="text-sm text-slate-500 mb-4">找到 {filtered.length} 个结果</p>
+              <p className="text-xs text-slate-500 mb-2">找到 {filtered.length} 个结果</p>
             )}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
               {(query.trim() ? filtered : rest).map((tool) => (
                 <ToolCard
                   key={tool.id}

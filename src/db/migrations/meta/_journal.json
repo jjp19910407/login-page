@@ -8,6 +8,13 @@
       "when": 1776855476007,
       "tag": "0000_add_password_hash",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1778230054972,
+      "tag": "0001_glorious_hydra",
+      "breakpoints": true
     }
   ]
 }

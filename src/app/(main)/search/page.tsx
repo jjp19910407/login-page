@@ -3,9 +3,25 @@ import { tools, categories, regions, favorites } from "@/db/schema"
 import { eq, and, ilike, or } from "drizzle-orm"
 import { getSession } from "@/lib/auth"
 import { ToolCard } from "@/components/tool/ToolCard"
+import type { Metadata } from "next"
 
 interface Props {
   searchParams: Promise<{ q?: string }>
+}
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const { q } = await searchParams
+  if (!q) {
+    return {
+      title: "搜索 AI 工具",
+      description: "搜索国内外最优质的 AI 工具，快速找到你需要的人工智能应用。",
+    }
+  }
+  return {
+    title: `"${q}" 的搜索结果`,
+    description: `搜索 "${q}" 相关的 AI 工具，发现最适合你的人工智能应用。`,
+    robots: { index: false, follow: true },
+  }
 }
 
 export default async function SearchPage({ searchParams }: Props) {

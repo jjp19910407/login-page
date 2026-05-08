@@ -30,6 +30,7 @@ export function AddToolForm({ regions }: { regions: Region[] }) {
     description: "",
     logoUrl: "",
     pricingInfo: "",
+    company: "",
     categoryId: "",
     tags: "",
     isFeatured: false,
@@ -189,6 +190,17 @@ export function AddToolForm({ regions }: { regions: Region[] }) {
           accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml"
           className="hidden"
           onChange={handleFileUpload}
+        />
+      </div>
+
+      <div>
+        <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5 block">
+          所属公司
+        </label>
+        <Input
+          value={form.company}
+          onChange={(e) => set("company", e.target.value)}
+          placeholder="如：OpenAI / Google / Anthropic"
         />
       </div>
 
